@@ -1,0 +1,98 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--pb-black);
+}
+.sidebar {
+  width: 240px;
+  background: var(--pb-black-2);
+  border-right: 1px solid var(--pb-border-red);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  padding: 0;
+}
+.sidebarTop { padding: 28px 20px; }
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--pb-border);
+}
+.brandRed { color: var(--pb-red); }
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  color: var(--pb-gray);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.navItem:hover { background: var(--pb-cream-dim); color: var(--pb-cream); }
+.navItem.active { background: rgba(204,0,0,0.12); color: var(--pb-red); border-left: 2px solid var(--pb-red); }
+.sidebarBottom {
+  padding: 20px;
+  border-top: 1px solid var(--pb-border);
+}
+.userInfo { margin-bottom: 12px; }
+.userName { display: block; font-size: 0.875rem; color: var(--pb-cream); font-weight: 500; margin-bottom: 2px; }
+.userRole { font-size: 0.72rem; color: var(--pb-gray); text-transform: uppercase; letter-spacing: 0.1em; }
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--pb-gray);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+}
+.logoutBtn:hover { color: var(--pb-red); background: rgba(204,0,0,0.08); }
+.main {
+  margin-left: 240px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.mainHeader {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--pb-border);
+  background: var(--pb-black-2);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--pb-white);
+  letter-spacing: 0.06em;
+}
+.content {
+  padding: 32px;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+}

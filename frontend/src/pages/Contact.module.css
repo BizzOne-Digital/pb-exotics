@@ -1,0 +1,114 @@
+.layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.infoCards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.infoCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.infoCard:hover { border-color: var(--pb-border-red); }
+.infoIcon {
+  width: 42px; height: 42px;
+  background: rgba(204,0,0,0.1);
+  border: 1px solid var(--pb-border-red);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.infoCard span { display: block; font-size: 0.7rem; color: var(--pb-gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+.infoCard strong { font-size: 0.875rem; color: var(--pb-cream); }
+
+.hours {
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.hoursTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--pb-white);
+}
+.hoursRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--pb-border);
+  font-size: 0.85rem;
+}
+.hoursRow:last-of-type { border-bottom: none; }
+.hoursRow span { color: var(--pb-gray); }
+.hoursRow strong { color: var(--pb-cream); }
+.hoursNote { font-size: 0.75rem; color: var(--pb-gray); margin-top: 12px; line-height: 1.5; }
+
+.social p { font-size: 0.8rem; color: var(--pb-gray); margin-bottom: 10px; }
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--pb-cream);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.socialLink:hover { color: var(--pb-red); }
+
+/* Form */
+.formWrap {
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+}
+.formTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  color: var(--pb-white);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--pb-border-red);
+}
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.field label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--pb-gray); font-weight: 500; }
+.field input, .field textarea {
+  background: var(--pb-black-3);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--pb-cream);
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition);
+  resize: vertical;
+}
+.field input:focus, .field textarea:focus {
+  border-color: var(--pb-red);
+  box-shadow: 0 0 0 3px rgba(204,0,0,0.1);
+}
+.sentBox {
+  background: rgba(0,200,80,0.06);
+  border: 1px solid rgba(0,200,80,0.2);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+}
+.sentBox strong { display: block; font-family: var(--font-display); font-size: 1.8rem; color: var(--pb-white); margin-bottom: 12px; letter-spacing: 0.05em; }
+.sentBox p { color: var(--pb-gray); font-size: 0.9rem; }
+
+@media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .row { grid-template-columns: 1fr; } .formWrap { padding: 24px; } }

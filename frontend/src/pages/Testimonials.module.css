@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.card {
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+.stars { display: flex; gap: 3px; margin-bottom: 16px; }
+.text { color: var(--pb-gray-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px; }
+.name { color: var(--pb-gray); font-size: 0.8rem; letter-spacing: 0.05em; }
+.note { text-align: center; color: var(--pb-gray); font-size: 0.85rem; margin-top: 40px; }
+.note a { color: var(--pb-red); }
+
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }

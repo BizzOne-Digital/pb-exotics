@@ -1,0 +1,108 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+}
+.scrolled {
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(16px);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--pb-border-red);
+}
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  text-decoration: none;
+}
+.logoImg {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+}
+.links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: nowrap;
+}
+.links a {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--pb-gray-light);
+  transition: var(--transition);
+  position: relative;
+}
+.links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--pb-red);
+  transition: var(--transition);
+}
+.links a:hover, .links a.active {
+  color: var(--pb-white);
+}
+.links a:hover::after, .links a.active::after {
+  width: 100%;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cartBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--pb-cream);
+  transition: var(--transition);
+}
+.cartBtn:hover { color: var(--pb-red); }
+.cartBadge {
+  position: absolute;
+  top: -8px; right: -8px;
+  background: var(--pb-red);
+  color: white;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.hamburger {
+  display: none;
+  color: var(--pb-cream);
+  padding: 4px;
+}
+
+@media (max-width: 1200px) {
+  .hamburger { display: flex; }
+  .links {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,10,0.98);
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    z-index: 800;
+    overflow-y: auto;
+    padding: 40px 0;
+  }
+  .links.open { display: flex; }
+  .links a { font-size: 1.3rem; letter-spacing: 0.1em; white-space: normal; }
+}

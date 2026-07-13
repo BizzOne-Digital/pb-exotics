@@ -1,0 +1,89 @@
+.groupTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--pb-white);
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+.tierGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.tierCard {
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+.tierCard:hover { border-color: var(--pb-border-red); }
+.tierSize {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--pb-white);
+  letter-spacing: 0.05em;
+}
+.tierSub {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--pb-gray);
+  margin: 4px 0 16px;
+}
+.tierPrice {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--pb-red);
+}
+.tierNote {
+  color: var(--pb-gray);
+  font-size: 0.85rem;
+  margin-top: 16px;
+}
+.contactBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border-red);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  flex-wrap: wrap;
+}
+.contactBox p { color: var(--pb-gray-light); font-size: 0.95rem; margin: 0; }
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.serviceCard {
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  position: relative;
+}
+.serviceIcon { margin-bottom: 16px; }
+.serviceTag {
+  position: absolute;
+  top: 24px; right: 24px;
+  background: rgba(204,0,0,0.12);
+  color: var(--pb-red);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.serviceCard h3 { color: var(--pb-white); font-size: 1.1rem; margin-bottom: 8px; }
+.serviceCard p { color: var(--pb-gray); font-size: 0.875rem; line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .tierGrid { grid-template-columns: repeat(2, 1fr); }
+  .servicesGrid { grid-template-columns: 1fr; }
+  .contactBox { flex-direction: column; align-items: flex-start; }
+  .contactBox a { margin-left: 0 !important; }
+}

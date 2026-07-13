@@ -1,0 +1,116 @@
+.hero { padding: 60px 0 80px; }
+.heroInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.heroText p {
+  color: var(--pb-gray-light);
+  line-height: 1.8;
+  margin-top: 20px;
+  max-width: 480px;
+}
+.heroImg img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--pb-border-red);
+}
+.missionSection {
+  background: var(--pb-black-2);
+  border-top: 1px solid var(--pb-border);
+  border-bottom: 1px solid var(--pb-border);
+  padding: 80px 0;
+}
+.missionQuote {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.quoteMark {
+  font-family: var(--font-serif);
+  font-size: 8rem;
+  color: var(--pb-red);
+  line-height: 0.5;
+  display: block;
+  margin-bottom: 24px;
+  opacity: 0.4;
+}
+.missionQuote p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: var(--pb-cream);
+  line-height: 1.8;
+  font-style: italic;
+}
+.quoteAuthor {
+  display: block;
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: var(--pb-red);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-style: normal;
+  font-family: var(--font-display);
+}
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.valueCard {
+  background: var(--pb-black-2);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  transition: var(--transition);
+}
+.valueCard:hover {
+  border-color: var(--pb-border-red);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-red);
+}
+.valueIcon {
+  width: 52px; height: 52px;
+  background: rgba(204,0,0,0.1);
+  border: 1px solid var(--pb-border-red);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.valueCard h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  color: var(--pb-white);
+  margin-bottom: 10px;
+}
+.valueCard p { font-size: 0.875rem; color: var(--pb-gray); line-height: 1.7; }
+.communitySection { padding: 80px 0; }
+.communityInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.communityImg {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--pb-border-red);
+}
+.communityText p {
+  color: var(--pb-gray-light);
+  line-height: 1.8;
+  margin-top: 20px;
+  max-width: 460px;
+}
+
+@media (max-width: 960px) {
+  .heroInner, .communityInner { grid-template-columns: 1fr; gap: 40px; }
+  .valuesGrid { grid-template-columns: 1fr; }
+}
