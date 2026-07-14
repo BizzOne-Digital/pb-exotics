@@ -18,14 +18,13 @@ const Home = () => {
       <section className={styles.hero}>
         <div
           className={styles.heroBg}
-          style={{ backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.85) 100%), url(${process.env.PUBLIC_URL}/hero1.png)` }}
+          style={{ backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.85) 100%), url(${process.env.PUBLIC_URL}/hero2.png)` }}
         />
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroContent}>
             <p className="section-subtitle">Welcome to the beginning</p>
             <h1 className={styles.heroTitle}>
-              PB<br />
-              <span>EXOTICS</span>
+              PB <span>EXOTICS</span>
             </h1>
             <div className="red-line" />
             <p className={styles.heroText}>
