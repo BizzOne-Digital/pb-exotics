@@ -76,11 +76,10 @@
 }
 .pricingItem span { font-size: 0.7rem; color: var(--pb-gray); }
 .pricingItem strong { font-size: 1rem; color: var(--pb-cream); }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+/* Flower: show two strains per view, like a genetics carousel */
+.twoUpTrack > * {
+  width: calc(50% - 10px);
 }
-@media (max-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .twoUpTrack > * { width: calc(85% - 10px); }
+}

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"d:/Codingg/BizzOne\" && find . -maxdepth 3 -iname \"*smoka*\" 2>/dev/null)",
+      "Read(//d/Codingg/BizzOne/**)",
+      "Bash(cd \"d:/Codingg/BizzOne/B-June Websites/smokablunt\" && find src -type f \\\\\\( -iname \"*home*\" -o -iname \"*nav*\" -o -iname \"*header*\" -o -iname \"*shop*\" -o -iname \"*categor*\" \\\\\\) 2>/dev/null)",
+      "Read(//d/Codingg/BizzOne/B-June Websites/smokablunt/**)",
+      "Read(//d/Codingg/BizzOne/B-June Websites/**)",
+      "Bash(find \"d:/Codingg/BizzOne/B-June Websites/smokablunt/frontend\" -maxdepth 3 2>&1)",
+      "Read(//d/Codingg/BizzOne/B-June Websites/smokablunt/frontend/**)",
+      "Bash(find \"d:/Codingg/BizzOne/B-June Websites/smokablunt/frontend/src\" -type f 2>&1 | grep -v node_modules)",
+      "Read(//d/Codingg/BizzOne/B-June Websites/smokablunt/frontend/app/**)",
+      "Bash(find \"d:/Codingg/BizzOne/B-June Websites/smokablunt/frontend/components\" -type f 2>&1)",
+      "Read(//d/Codingg/BizzOne/B-June Websites/smokablunt/frontend/components/**)",
+      "Read(//d/Codingg/BizzOne/B-June Websites/smokablunt/frontend/app/shop/**)"
+    ]
+  }
+}

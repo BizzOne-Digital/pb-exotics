@@ -81,13 +81,11 @@
 
 .heroStrip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   width: 100%;
+  max-width: 620px;
   animation: fadeUp 0.8s 0.2s ease both;
-}
-@media (max-width: 900px) {
-  .heroStrip { grid-template-columns: repeat(2, 1fr); }
 }
 .heroStripItem {
   display: flex;
@@ -171,6 +169,70 @@
   object-fit: cover;
   border-radius: var(--radius-xl);
   border: 1px solid var(--pb-border-red);
+}
+
+/* Shop By Category tiles */
+.categoryTile {
+  position: relative;
+  display: block;
+  height: 220px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--pb-border-red);
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 20%, rgba(204,0,0,0.18) 0%, var(--pb-black-2) 70%);
+  transition: var(--transition);
+}
+.categoryTile:hover {
+  border-color: var(--pb-red);
+  box-shadow: var(--shadow-red);
+}
+.categoryTileOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10,10,10,0.9) 100%);
+}
+.categoryTileText {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px;
+}
+.categoryTileText strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--pb-white);
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+.categoryTileText span {
+  font-size: 0.78rem;
+  color: var(--pb-gray-light);
+}
+
+/* Delivery Info feature cards */
+.deliveryFeatureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.deliveryFeatureCard {
+  background: var(--pb-black);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: var(--transition);
+}
+.deliveryFeatureCard:hover { border-color: var(--pb-border-red); }
+.deliveryFeatureCard strong {
+  font-size: 0.95rem;
+  color: var(--pb-white);
+}
+.deliveryFeatureCard span {
+  font-size: 0.78rem;
+  color: var(--pb-gray);
 }
 
 /* Delivery CTA */

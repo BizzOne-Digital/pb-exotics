@@ -3,8 +3,26 @@ import { Link } from 'react-router-dom';
 import api from '../utils/api';
 import ProductCard from '../components/common/ProductCard';
 import Carousel from '../components/common/Carousel';
-import { ArrowRightIcon, TruckIcon, ClockIcon, LeafIcon, CheckIcon } from '../components/common/Icons';
+import { ArrowRightIcon, TruckIcon, ClockIcon, PackageIcon, CheckIcon } from '../components/common/Icons';
 import styles from './Home.module.css';
+
+const shopCategories = [
+  { title: 'Flower', desc: 'Artisanal strains, hand-picked for potency and flavour', to: '/shop?category=Flower', img: '/img1.png' },
+  { title: 'Concentrates', desc: 'Premium wax, shatter, and live resin extracts', to: '/shop?category=Concentrates', img: '/img2.png' },
+  { title: 'Edibles', desc: 'Precisely dosed chocolates, gummies, and infused treats', to: '/shop?category=Edibles', img: '/img3.png' },
+  { title: 'Vapes', desc: 'Carts and disposables, tested and trusted', to: '/shop?category=Vapes',img: '/img4.png' },
+  { title: 'Accessories', desc: 'Smoking and vaping gear', to: '/shop?category=Accessories',img: '/img5.png' },
+  { title: 'Sativa', desc: 'Energizing and uplifting', to: '/shop?strain=Sativa',img: '/img6.png' },
+  { title: 'Indica', desc: 'Relaxing and sedating', to: '/shop?strain=Indica',img: '/img7.png' },
+  { title: 'Hybrid', desc: 'Balanced and versatile', to: '/shop?strain=Hybrid',img: '/img8.png' },
+];
+
+const deliveryFeatures = [
+  { icon: ClockIcon, t: 'Fast Delivery', s: 'Same day service' },
+  { icon: TruckIcon, t: '$5 Delivery Fee', s: 'Free over minimum order' },
+  { icon: PackageIcon, t: 'Discreet', s: 'Plain packaging' },
+  { icon: CheckIcon, t: '19+ Verified', s: 'ID required at door' },
+];
 
 const Home = () => {
   const { data: featured = [] } = useQuery({
@@ -42,9 +60,7 @@ const Home = () => {
           <div className={styles.heroStrip}>
             {[
               { icon: TruckIcon, label: 'Same Day Delivery', sub: '3 windows available daily' },
-              { icon: ClockIcon, label: 'Next Day Courier', sub: 'Tracking from day of order' },
-              { icon: LeafIcon, label: 'Premium Quality', sub: 'Every drop meets our standard' },
-              { icon: CheckIcon, label: 'E-Transfer Only', sub: 'Simple, secure, fast' },
+              { icon: ClockIcon, label: 'Next Day Courier', sub: 'Tracking provided the next day' },
             ].map(({ icon: Icon, label, sub }) => (
               <div key={label} className={styles.heroStripItem}>
                 <Icon size={22} style={{ color: 'var(--pb-red)', flexShrink: 0 }} />
@@ -80,21 +96,51 @@ const Home = () => {
         </section>
       )}
 
-      {/* About Blurb */}
+      {/* Shop By Category */}
+      <section className="section">
+        <div className="container">
+          <p className="section-subtitle">Browse</p>
+          <h2 className="section-title" style={{ marginBottom: 40 }}>Shop By <span>Category</span></h2>
+          <Carousel>
+            {shopCategories.map(({ title, desc, to, img }) => (
+              <Link
+                key={title}
+                to={to}
+                className={styles.categoryTile}
+                style={img ? { backgroundImage: `url(${process.env.PUBLIC_URL}${img})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
+              >
+                <div className={styles.categoryTileOverlay} />
+                <div className={styles.categoryTileText}>
+                  <strong>{title}</strong>
+                  <span>{desc}</span>
+                </div>
+              </Link>
+            ))}
+          </Carousel>
+        </div>
+      </section>
+
+      {/* Delivery Info */}
       <section className={styles.aboutStrip}>
         <div className="container">
           <div className={styles.aboutInner}>
             <div className={styles.aboutText}>
-              <p className="section-subtitle">The Brand</p>
-              <h2 className="section-title">More Than A<br /><span>Price Tag</span></h2>
+              <p className="section-subtitle">Fast & Discreet</p>
+              <h2 className="section-title">Premium Delivery<br /><span>To Your Door</span></h2>
               <div className="red-line" />
-              <p>Our dedicated team works tirelessly to ensure all products meet company standards while keeping costs accessible. We are a brand powered by the community — and we honour that every single drop.</p>
-              <Link to="/about" className="btn btn-red" style={{ marginTop: 24 }}>
-                Read Our Story <ArrowRightIcon size={18} />
+              <p>Serving Brampton, Mississauga and surrounding areas. Free delivery on qualifying orders.</p>
+              <Link to="/shop" className="btn btn-red" style={{ marginTop: 24 }}>
+                Check Delivery Area <ArrowRightIcon size={18} />
               </Link>
             </div>
-            <div className={styles.aboutImg}>
-              <img src="/home.png" alt="PB Exotics Quality" />
+            <div className={styles.deliveryFeatureGrid}>
+              {deliveryFeatures.map(({ icon: Icon, t, s }) => (
+                <div key={t} className={styles.deliveryFeatureCard}>
+                  <Icon size={24} style={{ color: 'var(--pb-red)' }} />
+                  <strong>{t}</strong>
+                  <span>{s}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

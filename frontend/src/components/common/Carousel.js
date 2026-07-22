@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { ArrowRightIcon } from './Icons';
 import styles from './Carousel.module.css';
 
-const Carousel = ({ children }) => {
+const Carousel = ({ children, trackClassName }) => {
   const trackRef = useRef(null);
 
   const scrollBy = (dir) => {
@@ -18,7 +18,7 @@ const Carousel = ({ children }) => {
       <button className={`${styles.arrow} ${styles.arrowLeft}`} onClick={() => scrollBy(-1)} aria-label="Previous">
         <ArrowRightIcon size={18} style={{ transform: 'rotate(180deg)' }} />
       </button>
-      <div className={styles.track} ref={trackRef}>
+      <div className={`${styles.track} ${trackClassName || ''}`} ref={trackRef}>
         {children}
       </div>
       <button className={`${styles.arrow} ${styles.arrowRight}`} onClick={() => scrollBy(1)} aria-label="Next">

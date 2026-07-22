@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { CartIcon, MenuIcon, XIcon } from '../common/Icons';
@@ -9,6 +9,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { itemCount } = useCart();
   const location = useLocation();
+  const navRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -17,6 +18,28 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => setMenuOpen(false), [location]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onClickOutside);
+    document.addEventListener('touchstart', onClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+      document.removeEventListener('touchstart', onClickOutside);
+    };
+  }, [menuOpen]);
+
+  // The open mobile menu is a fullscreen overlay rendered inside the header
+  // (so the outside-click listener above sees it as "inside"). Closing on a
+  // direct click on the overlay background covers that case.
+  const closeIfBackground = (e) => {
+    if (e.target === e.currentTarget) setMenuOpen(false);
+  };
 
   const navItems = [
     { to: '/', label: 'Home', end: true },
@@ -29,13 +52,13 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} ref={navRef}>
       <div className={`container ${styles.inner}`}>
         <Link to="/" className={styles.logo}>
           <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="PB Exotics" className={styles.logoImg} />
         </Link>
 
-        <nav className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
+        <nav className={`${styles.links} ${menuOpen ? styles.open : ''}`} onClick={closeIfBackground}>
           {navItems.map(({ to, label, end }) => (
             <NavLink key={to} to={to} end={end} className={({ isActive }) => isActive ? styles.active : ''}>
               {label}

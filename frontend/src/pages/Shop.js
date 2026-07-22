@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import api from '../utils/api';
 import ProductCard from '../components/common/ProductCard';
-import { SearchIcon, ArrowRightIcon, ClockIcon, TruckIcon, PackageIcon, CheckIcon } from '../components/common/Icons';
+import Carousel from '../components/common/Carousel';
+import { SearchIcon, ArrowRightIcon, ClockIcon, TruckIcon, PackageIcon, CheckIcon, MapPinIcon } from '../components/common/Icons';
 import styles from './Shop.module.css';
 import pricingStyles from './Pricing.module.css';
 
@@ -15,17 +16,20 @@ const flowerTiers = [
 ];
 
 const deliveryServices = [
-  { icon: ClockIcon, title: 'Same Day Delivery', desc: 'Max 1hr 30min wait, or pre-order within a delivery window.', tag: 'Free' },
-  { icon: TruckIcon, title: 'Next Day Courier', desc: 'Order today, tracked delivery arrives the next day.', tag: 'Free' },
-  { icon: PackageIcon, title: 'Mail Order Shipping', desc: 'Packed and shipped the next morning after payment.', tag: 'Free' },
+  { icon: ClockIcon, title: 'Same Day Delivery', desc: 'Max 1hr 30min wait, or pre-order within a delivery window. Price varies by delivery service.', tag: '$5' },
+  { icon: TruckIcon, title: 'Next Day Courier', desc: 'Tracking will be provided the next day, once payment is confirmed.', tag: 'Free' },
+  { icon: PackageIcon, title: 'Mail Order Shipping', desc: 'Packed and shipped the next morning after payment.', tag: '$20 Flat Rate' },
 ];
 
 const categories = ['All', 'Flower', 'Edibles', 'Concentrates', 'Vapes', 'Accessories'];
 const strains = ['All', 'Indica', 'Sativa', 'Hybrid'];
 
 const Shop = () => {
-  const [category, setCategory] = useState('All');
-  const [strain, setStrain] = useState('All');
+  const [searchParams] = useSearchParams();
+  const initialCategory = categories.includes(searchParams.get('category')) ? searchParams.get('category') : 'All';
+  const initialStrain = strains.includes(searchParams.get('strain')) ? searchParams.get('strain') : 'All';
+  const [category, setCategory] = useState(initialCategory);
+  const [strain, setStrain] = useState(initialStrain);
   const [search, setSearch] = useState('');
 
   const params = {};
@@ -86,9 +90,9 @@ const Shop = () => {
               No products found for these filters.
             </div>
           ) : (
-            <div className={styles.grid}>
+            <Carousel trackClassName={category === 'Flower' ? styles.twoUpTrack : undefined}>
               {products.map(p => <ProductCard key={p._id} product={p} />)}
-            </div>
+            </Carousel>
           )}
 
           {/* Pricing & Services */}
@@ -126,6 +130,20 @@ const Shop = () => {
                   <p>{desc}</p>
                 </div>
               ))}
+            </div>
+
+            <h2 className={pricingStyles.groupTitle} style={{ marginTop: 56 }}>Coverage & Delivery Areas</h2>
+            <div className={pricingStyles.servicesGrid}>
+              <div className={pricingStyles.serviceCard}>
+                <div className={pricingStyles.serviceIcon}><MapPinIcon size={24} style={{ color: 'var(--pb-red)' }} /></div>
+                <h3>Brampton & Mississauga</h3>
+                <p>Free delivery on orders over $80. Orders under the minimum have a $5 delivery fee.</p>
+              </div>
+              <div className={pricingStyles.serviceCard}>
+                <div className={pricingStyles.serviceIcon}><MapPinIcon size={24} style={{ color: 'var(--pb-red)' }} /></div>
+                <h3>Surrounding & Other Cities</h3>
+                <p>Free delivery on orders over $100. Orders under the minimum have a $5 delivery fee.</p>
+              </div>
             </div>
           </div>
         </div>
