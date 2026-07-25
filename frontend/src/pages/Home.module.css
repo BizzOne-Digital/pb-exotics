@@ -172,10 +172,15 @@
 }
 
 /* Shop By Category tiles */
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 .categoryTile {
   position: relative;
   display: block;
-  height: 220px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-xl);
   border: 1px solid var(--pb-border-red);
   overflow: hidden;
@@ -282,6 +287,10 @@
   .windowsGrid { grid-template-columns: 1fr; }
   .stripGrid { grid-template-columns: 1fr; }
   .productsGrid { grid-template-columns: repeat(2, 1fr); }
+  .categoryGrid { gap: 8px; }
+  .categoryTileText { padding: 8px; }
+  .categoryTileText strong { font-size: 0.75rem; margin-bottom: 0; }
+  .categoryTileText span { display: none; }
 }
 @media (max-width: 480px) {
   .productsGrid { grid-template-columns: 1fr; }

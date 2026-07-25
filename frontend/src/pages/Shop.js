@@ -1,25 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import api from '../utils/api';
 import ProductCard from '../components/common/ProductCard';
-import Carousel from '../components/common/Carousel';
-import { SearchIcon, ArrowRightIcon, ClockIcon, TruckIcon, PackageIcon, CheckIcon, MapPinIcon } from '../components/common/Icons';
+import { SearchIcon } from '../components/common/Icons';
 import styles from './Shop.module.css';
-import pricingStyles from './Pricing.module.css';
-
-const flowerTiers = [
-  { size: 'HQ', sub: '3.5g', price: 30 },
-  { size: 'Q', sub: '7g', price: 55 },
-  { size: 'Half Oz', sub: '14g', price: 95 },
-  { size: 'Oz', sub: '28g', price: 150 },
-];
-
-const deliveryServices = [
-  { icon: ClockIcon, title: 'Same Day Delivery', desc: 'Max 1hr 30min wait, or pre-order within a delivery window. Price varies by delivery service.', tag: '$5' },
-  { icon: TruckIcon, title: 'Next Day Courier', desc: 'Tracking will be provided the next day, once payment is confirmed.', tag: 'Free' },
-  { icon: PackageIcon, title: 'Mail Order Shipping', desc: 'Packed and shipped the next morning after payment.', tag: '$20 Flat Rate' },
-];
 
 const categories = ['All', 'Flower', 'Edibles', 'Concentrates', 'Vapes', 'Accessories'];
 const strains = ['All', 'Indica', 'Sativa', 'Hybrid'];
@@ -52,6 +37,26 @@ const Shop = () => {
 
           {/* Filters */}
           <div className={styles.filters}>
+            <div className={styles.filterGroup}>
+              <button
+                className={`${styles.filterBtn} ${category === 'All' && strain === 'All' ? styles.active : ''}`}
+                onClick={() => { setCategory('All'); setStrain('All'); }}
+              >All</button>
+              {categories.slice(1).map(c => (
+                <button
+                  key={c}
+                  className={`${styles.filterBtn} ${category === c ? styles.active : ''}`}
+                  onClick={() => { setCategory(c); setStrain('All'); }}
+                >{c}</button>
+              ))}
+              {strains.slice(1).map(s => (
+                <button
+                  key={s}
+                  className={`${styles.filterBtn} ${strain === s ? styles.active : ''}`}
+                  onClick={() => { setStrain(s); setCategory('All'); }}
+                >{s}</button>
+              ))}
+            </div>
             <div className={styles.searchWrap}>
               <SearchIcon size={16} style={{ color: 'var(--pb-gray)' }} />
               <input
@@ -61,24 +66,6 @@ const Shop = () => {
                 onChange={e => setSearch(e.target.value)}
                 className={styles.searchInput}
               />
-            </div>
-            <div className={styles.filterGroup}>
-              {categories.map(c => (
-                <button
-                  key={c}
-                  className={`${styles.filterBtn} ${category === c ? styles.active : ''}`}
-                  onClick={() => setCategory(c)}
-                >{c}</button>
-              ))}
-            </div>
-            <div className={styles.filterGroup}>
-              {strains.map(s => (
-                <button
-                  key={s}
-                  className={`${styles.filterBtn} ${strain === s ? styles.active : ''}`}
-                  onClick={() => setStrain(s)}
-                >{s}</button>
-              ))}
             </div>
           </div>
 
@@ -90,62 +77,10 @@ const Shop = () => {
               No products found for these filters.
             </div>
           ) : (
-            <Carousel trackClassName={category === 'Flower' ? styles.twoUpTrack : undefined}>
+            <div className={styles.productsGrid}>
               {products.map(p => <ProductCard key={p._id} product={p} />)}
-            </Carousel>
+            </div>
           )}
-
-          {/* Pricing & Services */}
-          <div style={{ marginTop: 72 }}>
-            <h2 className={pricingStyles.groupTitle}>Flower Pricing</h2>
-            <div className={pricingStyles.tierGrid}>
-              {flowerTiers.map(({ size, sub, price }) => (
-                <div key={size} className={pricingStyles.tierCard}>
-                  <span className={pricingStyles.tierSize}>{size}</span>
-                  <span className={pricingStyles.tierSub}>{sub}</span>
-                  <div className={pricingStyles.tierPrice}>${price}</div>
-                </div>
-              ))}
-            </div>
-            <p className={pricingStyles.tierNote}>
-              Some premium / exotic flower drops may vary — check the product page or contact us for exact pricing.
-            </p>
-
-            <h2 className={pricingStyles.groupTitle} style={{ marginTop: 56 }}>Other Categories</h2>
-            <div className={pricingStyles.contactBox}>
-              <CheckIcon size={22} style={{ color: 'var(--pb-red)', flexShrink: 0 }} />
-              <p>Concentrates, vapes, edibles and specialty items are priced individually — <strong>contact for pricing</strong> on any product marked as such.</p>
-              <Link to="/contact" className="btn btn-outline" style={{ marginLeft: 'auto', whiteSpace: 'nowrap' }}>
-                Contact Us <ArrowRightIcon size={16} />
-              </Link>
-            </div>
-
-            <h2 className={pricingStyles.groupTitle} style={{ marginTop: 56 }}>Delivery & Shipping</h2>
-            <div className={pricingStyles.servicesGrid}>
-              {deliveryServices.map(({ icon: Icon, title, desc, tag }) => (
-                <div key={title} className={pricingStyles.serviceCard}>
-                  <div className={pricingStyles.serviceIcon}><Icon size={24} style={{ color: 'var(--pb-red)' }} /></div>
-                  <div className={pricingStyles.serviceTag}>{tag}</div>
-                  <h3>{title}</h3>
-                  <p>{desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <h2 className={pricingStyles.groupTitle} style={{ marginTop: 56 }}>Coverage & Delivery Areas</h2>
-            <div className={pricingStyles.servicesGrid}>
-              <div className={pricingStyles.serviceCard}>
-                <div className={pricingStyles.serviceIcon}><MapPinIcon size={24} style={{ color: 'var(--pb-red)' }} /></div>
-                <h3>Brampton & Mississauga</h3>
-                <p>Free delivery on orders over $80. Orders under the minimum have a $5 delivery fee.</p>
-              </div>
-              <div className={pricingStyles.serviceCard}>
-                <div className={pricingStyles.serviceIcon}><MapPinIcon size={24} style={{ color: 'var(--pb-red)' }} /></div>
-                <h3>Surrounding & Other Cities</h3>
-                <p>Free delivery on orders over $100. Orders under the minimum have a $5 delivery fee.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </div>

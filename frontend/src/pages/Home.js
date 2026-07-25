@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import api from '../utils/api';
 import ProductCard from '../components/common/ProductCard';
 import Carousel from '../components/common/Carousel';
-import { ArrowRightIcon, TruckIcon, ClockIcon, PackageIcon, CheckIcon } from '../components/common/Icons';
+import PromoSlider from '../components/common/PromoSlider';
+import { ArrowRightIcon, TruckIcon, ClockIcon, PackageIcon, CheckIcon, UsersIcon } from '../components/common/Icons';
 import styles from './Home.module.css';
 
 const shopCategories = [
@@ -15,6 +16,33 @@ const shopCategories = [
   { title: 'Sativa', desc: 'Energizing and uplifting', to: '/shop?strain=Sativa',img: '/img6.png' },
   { title: 'Indica', desc: 'Relaxing and sedating', to: '/shop?strain=Indica',img: '/img7.png' },
   { title: 'Hybrid', desc: 'Balanced and versatile', to: '/shop?strain=Hybrid',img: '/img8.png' },
+];
+
+const promoSlides = [
+  {
+    icon: UsersIcon,
+    img: '/pic1.png',
+    title: 'Refer a Friend. Get 20 Off.',
+    subtitle: 'They order. You save. Get 20 off your next order when you refer a friend.',
+    buttonText: 'Explore',
+    to: '/shop',
+  },
+  {
+    icon: PackageIcon,
+    img: '/pic2.png',
+    title: 'Bundle Deals. Best Value.',
+    subtitle: 'Mix and match your favourites and save more on every bundle.',
+    buttonText: 'Explore',
+    to: '/shop',
+  },
+  {
+    icon: TruckIcon,
+    img: '/pic3.png',
+    title: 'Free Delivery On Qualifying Orders.',
+    subtitle: 'Fast, discreet delivery straight to your door across our service area.',
+    buttonText: 'Explore',
+    to: '/shop',
+  },
 ];
 
 const deliveryFeatures = [
@@ -52,8 +80,8 @@ const Home = () => {
               <Link to="/shop" className="btn btn-red">
                 Shop Now <ArrowRightIcon size={18} />
               </Link>
-              <Link to="/about" className="btn btn-outline">
-                Our Story
+              <Link to="/delivery" className="btn btn-outline">
+                Check Delivery Area
               </Link>
             </div>
           </div>
@@ -101,7 +129,7 @@ const Home = () => {
         <div className="container">
           <p className="section-subtitle">Browse</p>
           <h2 className="section-title" style={{ marginBottom: 40 }}>Shop By <span>Category</span></h2>
-          <Carousel>
+          <div className={styles.categoryGrid}>
             {shopCategories.map(({ title, desc, to, img }) => (
               <Link
                 key={title}
@@ -116,7 +144,14 @@ const Home = () => {
                 </div>
               </Link>
             ))}
-          </Carousel>
+          </div>
+        </div>
+      </section>
+
+      {/* Promo Slider */}
+      <section className="section">
+        <div className="container">
+          <PromoSlider slides={promoSlides} />
         </div>
       </section>
 
@@ -129,7 +164,7 @@ const Home = () => {
               <h2 className="section-title">Premium Delivery<br /><span>To Your Door</span></h2>
               <div className="red-line" />
               <p>Serving Brampton, Mississauga and surrounding areas. Free delivery on qualifying orders.</p>
-              <Link to="/shop" className="btn btn-red" style={{ marginTop: 24 }}>
+              <Link to="/delivery" className="btn btn-red" style={{ marginTop: 24 }}>
                 Check Delivery Area <ArrowRightIcon size={18} />
               </Link>
             </div>
@@ -142,36 +177,6 @@ const Home = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Delivery Windows CTA */}
-      <section className={styles.deliveryCta}>
-        <div className="container">
-          <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 12 }}>
-            Same Day <span>Delivery</span>
-          </h2>
-          <p style={{ textAlign: 'center', color: 'var(--pb-gray)', marginBottom: 40 }}>
-            Pick your window — we deliver to your door.
-          </p>
-          <div className={styles.windowsGrid}>
-            {[
-              { window: '10AM – 2PM', label: 'Morning Window' },
-              { window: '2PM – 6PM', label: 'Afternoon Window' },
-              { window: '6PM – 10PM', label: 'Evening Window' },
-            ].map(({ window, label }) => (
-              <div key={window} className={styles.windowCard}>
-                <ClockIcon size={28} style={{ color: 'var(--pb-red)' }} />
-                <strong>{window}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link to="/shop" className="btn btn-red">
-              Order Now <ArrowRightIcon size={18} />
-            </Link>
           </div>
         </div>
       </section>
